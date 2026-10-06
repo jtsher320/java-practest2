@@ -1,0 +1,31 @@
+Q1)
+
+record Book(String title, int pages, int year) {}
+
+
+void main() {
+
+    VList<Book> books = VList.of( // inferred type for ’books’ var(iable): VList<Book>
+        new Book("The Martian", 220, 2019), // <- book (not film) version!
+        new Book("Project Hail Mary", 410, 2023), // <- ditto!
+        new Book("Biological War: A Scenario", 432, 2026), // <- (scary.. don’t read)
+        new Book("Dust", 416, 2013) // <- eh
+);
+
+q) var filtered = books.filter( b -> b.pages() >= 300 ) ;
+// var filtered = books.filter((Book b) -> b.pages() >= 300 ) ;
+// here's what's in the filtered list:
+// filtered = [ new Book("Project Hail Mary", 410, 2023), // <- ditto!
+                new Book("Biological War: A Scenario", 432, 2026), // <- (scary.. don’t read)
+                new Book("Biological War: A Scenario", 432, 2026), // <- (scary.. don’t read)
+
+b)
+ VList<Book> books = VList.of( // inferred type for ’books’ var(iable): VList<Book>
+        new Book("The Martian", 220, 2019), // <- book (not film) version!
+        new Book("Project Hail Mary", 410, 2023), // <- ditto!
+        new Book("Biological War: A Scenario", 432, 2026), // <- (scary.. don’t read)
+        new Book("Dust", 416, 2013) // <- eh
+);
+
+var transformed = books.map ((Book b -> new Book(b.title(), b.pages() + 10, b.year()));
+IO.println( transformed ); // [6, 6, 6]
